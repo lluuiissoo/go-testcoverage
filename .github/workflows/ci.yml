@@ -13,13 +13,7 @@ jobs:
     - uses: actions/setup-go@v2
       with:
         go-version: '^1.14.0'
-
-    - name: Setup GO environment
-      run: |
-            go mod download
-            go get -u golang.org/x/lint/golint
-            go get -t .
-    
+        
     - name: Lint
       run: |
         golint -set_exit_status ./...
@@ -44,7 +38,7 @@ jobs:
             if (( $(echo "$totalCoverage $TESTCOVERAGE_THRESHOLD" | awk '{print ($1 > $2)}') )); then
                 echo "OK"
             else
-                echo "Current test coverage is below threshold. Please add more unit tests or adjust threshold to a lower value."
+                echo "Current test coverage is below threshold. Please add more unit tests."
                 echo "Failed"
                 exit 1
             fi
